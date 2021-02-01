@@ -13,20 +13,28 @@ body {
     -moz-transition: 0.8s;
     -ms-transition: 0.8s;
     -o-transition: 0.8s;
+    padding: 0;
+    margin: 0;
+}
+
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    max-height: 800px;
+    width: 90%;
+    max-width: 400px;
 }
 
 h1{
-    margin-top: 25vh;
-    margin-bottom: 1.5%;
     color: #fff;
+    text-align: center;
 }
 
-.container {
-    width: 90%;
-    max-width: 400px;
-    height: 90%;
-    max-height: 800px;
-}
 
 input, select {
     padding: 25px;
@@ -38,7 +46,7 @@ input, select {
 }
 
 .result{
-    width: 63.7%;
+    width: 64.6%;
 }
 
 select{
@@ -51,13 +59,24 @@ select{
     width: 31.3%;
 }
 
+.calculatorButtons, .moneyAmount{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
 .moneyAmount, .calculatorButtons, button{
     margin-top: 3px;
+}
+
+input[type="text"] {
+    background-color: rgb(255, 255, 255);
 }
 
 input[type="button"]:active {
     background-color: rgb(37, 35, 59);
     color: #fff;
+
 }
 
 button {
@@ -70,6 +89,6 @@ button {
 
 .bottom-buttons {
     float: left;
-    margin-left: 1.5%;
+    margin-left: 1.2%;
     margin-top: 0.7%;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 
 <head>
     <meta charset="utf-8" />
@@ -10,50 +10,52 @@
     <link rel="stylesheet" href="light.css" id="theme"/>
 </head>
 <body>
-<center>
     <div class="container">
         <h1>Currency Calculator</h1>
         <div class="moneyAmount">
-            <input type="text" name="result" class="result" placeholder="Visiting" />
-            <select name="currency">
-                <option value="UK Pounds">Pound</option>
+            <input type="text" id="wantedAmount" class="result" placeholder="Visiting" readonly/>
+
+            <select id = "startingCurrency" name="currency">
+                <option value="Pound">Pound</option>
                 <option value="Euro">Euro</option>
-                <option value="Polish Zloty">Zloty</option>
+                <option value="Zloty">Zloty</option>
             </select>
         </div>
         <div class="moneyAmount">
-            <input type="text" name="result" class="result" placeholder="Card est" />
-            <select name="currency">
+            <input type="text" id = "result" class="result" placeholder="Card est" readonly/>
+            <select id = "goalCurrency" name="currency">
                 <option value="Euro">Euro</option>
-                <option value="Polish Zloty">Zloty</option>
-                <option value="UK Pounds">Pound</option>
+                <option value="Zloty">Zloty</option>
+                <option value="Pound">Pound</option>
             </select>
         </div>
         <div class="calculatorButtons">
-            <input type="button" value="1" id="one"/>
-            <input type="button" value="2" id="two"/>
-            <input type="button" value="3" id="three"/>
+            <input type="button" name = "numberButton" value="1" id="1"/>
+            <input type="button" name = "numberButton" value="2" id="2"/>
+            <input type="button" name = "numberButton" value="3" id="3"/>
         </div>
         <div class="calculatorButtons">
-            <input type="button" value="4" id="four" />
-            <input type="button" value="5" id="five" />
-            <input type="button" value="6" id="six"  />
+            <input type="button" name = "numberButton" value="4" id="4" />
+            <input type="button" name = "numberButton" value="5" id="5" />
+            <input type="button" name = "numberButton" value="6" id="6"  />
         </div>
         <div class="calculatorButtons">
-            <input type="button" value="7" id="seven"/>
-            <input type="button" value="8" id="eight"/>
-            <input type="button" value="9" id="nine"/>
+            <input type="button" name = "numberButton" value="7" id="7"/>
+            <input type="button" name = "numberButton" value="8" id="8"/>
+            <input type="button" name = "numberButton" value="9" id="9"/>
         </div>
         <div class="calculatorButtons">
-            <input type="button" value="C" id="C"/>
-            <input type="button" value="0" id="0"/>
-            <input type="button" value="=" id="="/>
+            <input type="button" value="C" id="ClearButton"/>
+            <input type="button" name = "numberButton" value="0" id="0"/>
+            <input type="button" value="=" id="Equals"/>
         </div>
         <div class="bottom-buttons">
-            <button id="dark-mode"> Dark Modee 🌙 </button>
+            <button id="dark-mode"> Dark Mode 🌙 </button>
         </div>
     </div>
-</center>
 
+<script src = "model.js"></script>
+<script src = "view.js"></script>
+<script src = "controller.js"></script>
 </body>
 </html>
