@@ -8,6 +8,12 @@ class Model{
         this.ans = "";
         this.setStartingCurrency("Pound");
         this.setGoalCurrency("Euro");
+        this.setBankFee(0);
+    }
+
+    setBankFee(bankFee){
+        this.bankFee = bankFee;
+        // console.log(bankFee);
     }
 
     setStartingCurrency(startingCurrency){
@@ -49,6 +55,9 @@ class Model{
         if(this.goalCurrency === 'Pound'){
             this.ans = this.currentAmount;
         }
+
+        this.fee = this.ans * this.bankFee / 100;
+        this.ans = parseFloat(this.ans) + parseFloat(this.fee);
 
         return this.ans;
     }

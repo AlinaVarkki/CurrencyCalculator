@@ -19,6 +19,7 @@ body {
 
 
 .container {
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -51,7 +52,7 @@ input, select {
 
 select{
     width: 31.3%;
-    color: #fff;
+    color: #ffffff;
     background-color: rgb(129, 85, 155);
 }
 
@@ -79,7 +80,8 @@ input[type="button"]:active {
 
 }
 
-button {
+button{
+    display: flex;
     border: none;
     background-color: rgb(41, 38, 38);
     padding: 10px;
@@ -87,8 +89,32 @@ button {
     border-radius: 4px;
 }
 
+#bankFeeSelector{
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    width: 90%;
+    height: 100%;
+}
+
+#bank{
+    display: flex;
+    flex-direction: row;
+    border: none;
+    background-color: rgb(181, 150, 203);
+    padding: 10px;
+    color: white;
+    border-radius: 4px;
+}
+
 .bottom-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 98%;
     float: left;
     margin-left: 1.2%;
     margin-top: 0.7%;
+    margin-bottom: 1%;
 }

@@ -7,12 +7,12 @@ class View{
         return elements;
     }
 
-    setCurrency(field, value){
+    setSelectionToSpecificIndex(field, value){
         document.getElementById(field).selectedIndex = value;
     }
 
-    getCurrency(currencyId){
-        return document.getElementById(currencyId).value;
+    getValueById(id){
+        return document.getElementById(id).value;
     }
 
     setUpButtonHandler(id, handler){
@@ -41,6 +41,10 @@ class View{
 
     getGoalCurrencyId(){
         return 'goalCurrency';
+    }
+
+    getBankFeeId(){
+        return 'bankFeeSelector';
     }
 
     getIdOfCurrentlySelectedOption(field){
