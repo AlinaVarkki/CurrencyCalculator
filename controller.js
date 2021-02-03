@@ -2,12 +2,14 @@
 
 const view = new View();
 const model = new Model();
-let currencyAndRateMap= new Map();
+let currencyAndRateMap = new Map();
+currencyAndRateMap.set("EUR", 1.0);
 let currencies = [];
+
+updateCurrenciesAndRates();
 
 //handlers for all digits
 let element = view.getAllNumericButtons();
-
 for(let i = 0; i < element.length; i++){
     addNumericButtonListener(element[i].id);
 }
@@ -19,16 +21,9 @@ function addNumericButtonListener(id){
     });
 }
 
-//set currencies ans bank fee from local storage
-let selectedHomeCurrency = localStorage.selectedCurrencyId || 0;
-view.setSelectionToSpecificIndex(view.getStartingCurrencyId(), selectedHomeCurrency);
-let selectedGoalCurrency = localStorage.goalCurrencyId || 0;
-view.setSelectionToSpecificIndex(view.getGoalCurrencyId(), selectedGoalCurrency);
+//set bank fee from local storage
 let selectedBankFee = localStorage.bankFee || 0;
 view.setSelectionToSpecificIndex(view.getBankFeeId(), selectedBankFee);
-
-model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
-model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
 model.setBankFee(view.getValueById(view.getBankFeeId()));
 
 //handler for clear button
@@ -45,14 +40,22 @@ view.setUpButtonHandler(view.getStartingCurrencyId(),() =>{
 
 //handler for goal currency selector
 view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
-    model.setGoalCurrency(view.getValueById(view.getStartingCurrencyId()));
+    model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
     localStorage.goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
 });
 
 //handler for equals button
 view.setUpButtonHandler(view.getEqualsButtonId(),() =>{
-    view.displayResultValue(model.getAnswer());
+    let answer = model.getAnswer();
+    if(!isNaN(answer)){
+        view.displayResultValue(model.getAnswer());
+    }
+    // else{
+    //     model.clearCurrAmount();
+    //     view.displayUpdatedValue(model.getCurrentAmount());
+    // }
 });
+
 
 //handler for bank fee selector
 view.setUpButtonHandler(view.getBankFeeId(), ()=>{
@@ -61,14 +64,11 @@ view.setUpButtonHandler(view.getBankFeeId(), ()=>{
 });
 
 
-updateCurrenciesAndRates();
-
 function updateCurrenciesAndRates() {
     let request = new XMLHttpRequest();
     request.open("GET", "https://devweb2020.cis.strath.ac.uk/~aes02112/ecbxml.php", true);
-    request.onreadystatechange = function () {
-        if (request.readyState === 4 && request.status === 200)
-        {
+
+    request.addEventListener("load", function () {
             let exchangeRates = request.responseXML;
             let cubes = exchangeRates.getElementsByTagName("Cube");
             for (let i = 0; i < cubes.length; i++) {
@@ -76,32 +76,27 @@ function updateCurrenciesAndRates() {
                 let rate = cubes[i].getAttribute("rate");
                 if (currency !== null) {
                     currencyAndRateMap.set(currency, rate);
-                    // console.log(currency);
-                    currencies.push(currency.toString());
-
-                    let newCurrency = new Option(currency, currency);
-                    document.getElementById("startingCurrency").add(newCurrency, undefined);
+                    currencies.push(currency);
+                    let startingCurrField = document.getElementById(view.getStartingCurrencyId());
+                    startingCurrField.options[startingCurrField.options.length] = new Option(currency, currency);
+                    let goalCurrField = document.getElementById(view.getGoalCurrencyId());
+                    goalCurrField.options[goalCurrField.options.length] = new Option(currency, currency);
                 }
             }
-        }
-    };
+            setCurrenciesFromLocalStorage();
+    });
     request.send(null);
-
-    console.log(currencies[5]);
-    console.log(currencyAndRateMap);
-    console.log(currencies);
 }
 
-//add option currencies
-for(let i = 0; i < currencies.length; i++){
-    let newCurrency = new Option(currencies[i], currencies[i]);
-    document.getElementById("startingCurrency").add(newCurrency, undefined);
+function setCurrenciesFromLocalStorage(){
+    //set currencies ans bank fee from local storage
+    let selectedHomeCurrency = localStorage.selectedCurrencyId || 6;
+    view.setSelectionToSpecificIndex(view.getStartingCurrencyId(), selectedHomeCurrency);
+    let selectedGoalCurrency = localStorage.goalCurrencyId || 0;
+    view.setSelectionToSpecificIndex(view.getGoalCurrencyId(), selectedGoalCurrency);
+
+    model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
+    model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
+
+    model.setRatesMap(currencyAndRateMap);
 }
-
-let newCurrency1 = new Option(currencies[0], currencies[0]);
-document.getElementById("startingCurrency").add(newCurrency1, undefined);
-console.log(currencies[5]);
-
-
-let newCurrency = new Option("currencies[i]", "currencies[i]");
-document.getElementById("goalCurrency").add(newCurrency, undefined);

@@ -3,17 +3,21 @@
 class Model{
 
     constructor() {
-        this.poundRates = {Euro: 1.13, Zloty: 5.12};
         this.currentAmount = "";
         this.ans = "";
-        this.setStartingCurrency("Pound");
-        this.setGoalCurrency("Euro");
+        this.currencyAndRateMap = new Map();
+        this.setStartingCurrency("GBP");
+        this.setGoalCurrency("EUR");
         this.setBankFee(0);
+    }
+
+    setRatesMap(currencyAndRateMap){
+        this.currencyAndRateMap = currencyAndRateMap;
+        console.log(currencyAndRateMap);
     }
 
     setBankFee(bankFee){
         this.bankFee = bankFee;
-        // console.log(bankFee);
     }
 
     setStartingCurrency(startingCurrency){
@@ -37,26 +41,11 @@ class Model{
     }
 
     getAnswer(){
-        //first convert to pound if not yet pounds
-        if(this.startingCurrency !== 'Pound'){
-            if(this.startingCurrency === 'Euro'){
-                this.currentAmount = this.currentAmount / this.poundRates.Euro;
-            }else{
-                this.currentAmount = this.currentAmount / this.poundRates.Zloty;
-            }
-        }
-
-        if(this.goalCurrency === 'Euro'){
-            this.ans = this.currentAmount * this.poundRates.Euro;
-        }
-        if(this.goalCurrency === 'Zloty'){
-            this.ans = this.currentAmount * this.poundRates.Zloty;
-        }
-        if(this.goalCurrency === 'Pound'){
-            this.ans = this.currentAmount;
-        }
-
-        this.fee = this.ans * this.bankFee / 100;
+        this.ans = parseFloat(this.currencyAndRateMap.get(this.goalCurrency)) / parseFloat(this.currencyAndRateMap.get(this.startingCurrency)) * parseFloat(this.currentAmount);
+        console.log("starting rate " + parseFloat(this.currencyAndRateMap.get(this.startingCurrency)) + " starting currency " + this.startingCurrency);
+        console.log("goal rate " +this.currencyAndRateMap.get(this.goalCurrency)  + " goal currency " + this.goalCurrency);
+        console.log("requestedAmount " +parseFloat(this.currentAmount));
+        this.fee = parseFloat(this.ans) * parseFloat(this.bankFee) / 100;
         this.ans = parseFloat(this.ans) + parseFloat(this.fee);
 
         return this.ans;

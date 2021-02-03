@@ -27,6 +27,14 @@ class View{
         document.getElementById('result').value = value;
     }
 
+    displayValueToField(field, value){
+        document.getElementById(field).value = value;
+    }
+
+    getWantedAmountFieldId(){
+        return 'wantedAmount';
+    }
+
     getEqualsButtonId(){
         return 'Equals';
     }
@@ -50,5 +58,6 @@ class View{
     getIdOfCurrentlySelectedOption(field){
         return document.getElementById(field).selectedIndex;
     }
+
 
 }
