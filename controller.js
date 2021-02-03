@@ -5,8 +5,24 @@ const model = new Model();
 let currencyAndRateMap = new Map();
 currencyAndRateMap.set("EUR", 1.0);
 let currencies = [];
+let n = 0;
 
 updateCurrenciesAndRates();
+
+checkDateAndUpdateIfNeeded();
+
+function checkDateAndUpdateIfNeeded(){
+    //check when the application was run last, if it is run for the first time or it was over 24 hours ago, refresh the currencies
+    let lastUseTimestamp = JSON.parse(localStorage.getItem("lastUseTimeStamp"));
+    let currTimestamp = new Date().valueOf();
+
+    let diff = currTimestamp - lastUseTimestamp;
+    if(lastUseTimestamp === null || diff/1000/60/60 <= 24){
+        localStorage.setItem("lastUseTimeStamp", JSON.stringify(currTimestamp));
+
+    }
+}
+
 
 //handlers for all digits
 let element = view.getAllNumericButtons();
@@ -17,7 +33,7 @@ for(let i = 0; i < element.length; i++){
 function addNumericButtonListener(id){
     view.setUpButtonHandler(id,()=>{
         model.updateCurrentAmount(id);
-        view.displayUpdatedValue(model.getCurrentAmount());
+        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
     });
 }
 
@@ -29,7 +45,7 @@ model.setBankFee(view.getValueById(view.getBankFeeId()));
 //handler for clear button
 view.setUpButtonHandler(view.getClearButtonId(),() =>{
     model.clearCurrAmount();
-    view.displayUpdatedValue(model.getCurrentAmount());
+    view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
 });
 
 //handler for starting currency selector
@@ -48,21 +64,18 @@ view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
 view.setUpButtonHandler(view.getEqualsButtonId(),() =>{
     let answer = model.getAnswer();
     if(!isNaN(answer)){
-        view.displayResultValue(model.getAnswer());
+        view.displayValueToField(view.getResultFieldId(), model.getAnswer());
+    }else{
+        model.clearCurrAmount();
+        view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
     }
-    // else{
-    //     model.clearCurrAmount();
-    //     view.displayUpdatedValue(model.getCurrentAmount());
-    // }
 });
-
 
 //handler for bank fee selector
 view.setUpButtonHandler(view.getBankFeeId(), ()=>{
     model.setBankFee(view.getValueById(view.getBankFeeId()));
     localStorage.bankFee = view.getIdOfCurrentlySelectedOption(view.getBankFeeId());
 });
-
 
 function updateCurrenciesAndRates() {
     let request = new XMLHttpRequest();

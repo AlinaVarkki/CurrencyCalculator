@@ -19,20 +19,16 @@ class View{
         document.getElementById(id).addEventListener("click", handler);
     }
 
-    displayUpdatedValue(value){
-        document.getElementById('wantedAmount').value = value;
-    }
-
-    displayResultValue(value){
-        document.getElementById('result').value = value;
-    }
-
     displayValueToField(field, value){
         document.getElementById(field).value = value;
     }
 
     getWantedAmountFieldId(){
         return 'wantedAmount';
+    }
+
+    getResultFieldId(){
+        return 'result';
     }
 
     getEqualsButtonId(){
@@ -58,6 +54,5 @@ class View{
     getIdOfCurrentlySelectedOption(field){
         return document.getElementById(field).selectedIndex;
     }
-
 
 }
