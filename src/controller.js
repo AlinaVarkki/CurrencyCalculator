@@ -8,6 +8,7 @@ currencyAndRateMap.set("EUR", 1.0);
 
 checkDateAndUpdateValues();
 addHandlers();
+view.changeFlag();
 
 function checkDateAndUpdateValues(){
     //check when the rates were updated last, if it is run for the first time or rates were updated over 24 hours ago, refresh the rates
@@ -16,13 +17,11 @@ function checkDateAndUpdateValues(){
 
     let diffInHours = (currTimestamp - lastUpdateTimestamp)/1000/60/60;
     if(lastUpdateTimestamp === null || diffInHours >= 24){
-        console.log("updated values");
         updateCurrenciesAndRates();
         //if the values are refreshed, change last visited to current
         localStorage.setItem("lastUpdatedTime", currTimestamp.toString());
 
     }else{
-        console.log("got map from storage");
        //get currencies/rates map from localStorage
         currencyAndRateMap =  new Map(JSON.parse(localStorage.currencyRateMap));
         addCurrencyOptions();
@@ -47,12 +46,14 @@ function addHandlers(){
     view.setUpButtonHandler(view.getStartingCurrencyId(),() =>{
         model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
         localStorage.selectedCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
+        view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
     });
 
 //handler for goal currency selector
     view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
         model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
         localStorage.goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
+        view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
     });
 
     //handler for equals button
@@ -80,8 +81,6 @@ function addNumericButtonListener(id){
         view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
     });
 }
-
-
 
 function updateCurrenciesAndRates() {
     let request = new XMLHttpRequest();
@@ -130,4 +129,10 @@ function setValuesFromLocalStorage(){
     model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
     model.setBankFee(view.getValueById(view.getBankFeeId()));
 
+    updateFlags()
+}
+
+function updateFlags(){
+    view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
+    view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
 }

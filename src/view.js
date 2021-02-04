@@ -23,6 +23,19 @@ class View{
         document.getElementById(field).value = value;
     }
 
+    changeFlag(field, currValue) {
+        console.log("changing flag");
+        document.getElementById(field).src = "../resources/flags/"+ currValue +".png";
+    }
+
+    getFromFlagImageId(){
+        return "fromFlag";
+    }
+
+    getToFlagImageId(){
+        return "toFlag";
+    }
+
     getWantedAmountFieldId(){
         return 'wantedAmount';
     }
