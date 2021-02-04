@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Currency Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="normalize.css"/>
+    <link rel="stylesheet" href="light.css" id="theme"/>
+</head>
+<body>
+<div class="container">
+
+    <div class = "left-panel">
+
+        <div class="top-leftPanel">
+
+
+                <select id="startingCurrency" name="currency"></select>
+            <img id="fromFlag" src="" />
+            <img id = "arrows" src="../resources/reverse.png"/>
+            <img id="toFlag" src="" />
+
+                <select id="goalCurrency" name="currency"></select>
+
+
+        </div>
+
+        <div class="bottom-leftPanel">
+            <div id="bank">
+                <p id="bankFee">Bank fee:</p>
+                <select id="bankFeeSelector">
+                    <option value="0">0%</option>
+                    <option value="2">2%</option>
+                    <option value="4">4%</option>
+                    <option value="6">6%</option>
+                </select>
+            </div>
+        <button id="dark-mode"> Dark Mode 🌙</button>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class = "top-rightPanel">
+
+        <div class="moneyAmount">
+            <input type="text" id="result" class="result" placeholder="Card est" readonly/>
+        </div>
+            <div class="moneyAmount">
+                <input type="text" id="wantedAmount" class="result" placeholder="Visiting" readonly/>
+            </div>
+
+        </div>
+
+        <div class="bottom-rightPanel">
+        <div class="calculatorButtons">
+            <input type="button" name="numberButton" value="1" id="1"/>
+            <input type="button" name="numberButton" value="2" id="2"/>
+            <input type="button" name="numberButton" value="3" id="3"/>
+        </div>
+        <div class="calculatorButtons">
+            <input type="button" name="numberButton" value="4" id="4"/>
+            <input type="button" name="numberButton" value="5" id="5"/>
+            <input type="button" name="numberButton" value="6" id="6"/>
+        </div>
+        <div class="calculatorButtons">
+            <input type="button" name="numberButton" value="7" id="7"/>
+            <input type="button" name="numberButton" value="8" id="8"/>
+            <input type="button" name="numberButton" value="9" id="9"/>
+        </div>
+        <div class="calculatorButtons">
+            <input type="button" value="C" id="ClearButton"/>
+            <input type="button" name="numberButton" value="0" id="0"/>
+            <input type="button" value="=" id="Equals"/>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="model.js"></script>
+<script src="view.js"></script>
+<script src="controller.js"></script>
+</body>
+</html>

@@ -8,7 +8,6 @@ currencyAndRateMap.set("EUR", 1.0);
 
 checkDateAndUpdateValues();
 addHandlers();
-view.changeFlag();
 
 function checkDateAndUpdateValues(){
     //check when the rates were updated last, if it is run for the first time or rates were updated over 24 hours ago, refresh the rates

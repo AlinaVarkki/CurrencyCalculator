@@ -77,10 +77,9 @@ body {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    height: 80%;
+    height: 90%;
     max-height: 750px;
-    width: 90%;
-    max-width: 400px;
+    width: auto;
 }
 
 input, select {
@@ -170,6 +169,7 @@ button{
     height: 13%;
     opacity: 70%;
     box-shadow: 0 0 2px 2px #9AD0FD;
+
 }
 
 #startingCurrency, #goalCurrency{
