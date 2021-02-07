@@ -20,7 +20,7 @@ class View{
     }
 
     displayValueToField(field, value){
-        document.getElementById(field).value = value;
+        document.getElementById(field).innerHTML = value;
     }
 
     changeFlag(field, currValue) {

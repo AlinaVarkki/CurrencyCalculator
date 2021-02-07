@@ -50,6 +50,7 @@ function addHandlers(){
 //handler for clear button
     view.setUpButtonHandler(view.getClearButtonId(),() =>{
         model.clearCurrAmount();
+        view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
         view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
     });
 
@@ -66,6 +67,7 @@ function addHandlers(){
     //handler for equals button
     view.setUpButtonHandler(view.getEqualsButtonId(),() =>{
         equalButtonPressed();
+        // model.clearCurrAmount();
     });
 
     //handler for bank fee selector
@@ -95,6 +97,7 @@ function addHandlers(){
 function equalButtonPressed(){
     let answer = model.getAnswer();
     if(!isNaN(answer)){
+        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
         view.displayValueToField(view.getResultFieldId(), model.getAnswer());
     }else{
         model.clearCurrAmount();
@@ -117,7 +120,7 @@ function goalCurrencyChange(){
 function addNumericButtonListener(id){
     view.setUpButtonHandler(id,()=>{
         model.updateCurrentAmount(id);
-        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
+        view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
     });
 }
 
