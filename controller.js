@@ -55,36 +55,64 @@ function addHandlers(){
 
 //handler for starting currency selector
     view.setUpButtonHandler(view.getStartingCurrencyId(),() =>{
-        model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
-        localStorage.selectedCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
-        view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
+        startingCurrencyChange();
     });
 
 //handler for goal currency selector
     view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
-        model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
-        localStorage.goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
-        view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
+        goalCurrencyChange();
     });
 
     //handler for equals button
     view.setUpButtonHandler(view.getEqualsButtonId(),() =>{
-        let answer = model.getAnswer();
-        if(!isNaN(answer)){
-            view.displayValueToField(view.getResultFieldId(), model.getAnswer());
-        }else{
-            model.clearCurrAmount();
-            view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
-        }
+        equalButtonPressed();
     });
 
-//handler for bank fee selector
+    //handler for bank fee selector
     view.setUpButtonHandler(view.getBankFeeId(), ()=>{
         model.setBankFee(view.getValueById(view.getBankFeeId()));
         localStorage.bankFee = view.getIdOfCurrentlySelectedOption(view.getBankFeeId());
     });
+
+    //reverse currencies from/to
+    view.setUpButtonHandler(view.getArrowsId(), ()=>{
+
+        let startingCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
+        let goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
+
+        //switch value of select boxes
+        view.setSelectionToSpecificIndex(view.getStartingCurrencyId(), goalCurrencyId);
+        view.setSelectionToSpecificIndex(view.getGoalCurrencyId(), startingCurrencyId);
+        startingCurrencyChange();
+        goalCurrencyChange();
+
+        equalButtonPressed();
+    });
+    
+    
 }
 
+function equalButtonPressed(){
+    let answer = model.getAnswer();
+    if(!isNaN(answer)){
+        view.displayValueToField(view.getResultFieldId(), model.getAnswer());
+    }else{
+        model.clearCurrAmount();
+        view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
+    }
+}
+
+function startingCurrencyChange(){
+    model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
+    localStorage.selectedCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
+    view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
+}
+
+function goalCurrencyChange(){
+    model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
+    localStorage.goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
+    view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
+}
 
 function addNumericButtonListener(id){
     view.setUpButtonHandler(id,()=>{

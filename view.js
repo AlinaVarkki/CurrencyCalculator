@@ -63,6 +63,10 @@ class View{
         return 'bankFeeSelector';
     }
 
+    getArrowsId(){
+        return 'arrows';
+    }
+
     getIdOfCurrentlySelectedOption(field){
         return document.getElementById(field).selectedIndex;
     }

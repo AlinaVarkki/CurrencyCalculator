@@ -44,7 +44,8 @@ const resourcesToCache = [
     'resources/flags/THB.png',
     'resources/flags/TRY.png',
     'resources/flags/USD.png',
-    'resources/flags/ZAR.png'
+    'resources/flags/ZAR.png',
+    'resources/reverse.png'
 ];
 
 self.addEventListener('install', event => {
