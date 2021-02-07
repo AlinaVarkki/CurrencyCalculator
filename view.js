@@ -24,8 +24,7 @@ class View{
     }
 
     changeFlag(field, currValue) {
-        console.log("changing flag");
-        document.getElementById(field).src = "../resources/flags/"+ currValue +".png";
+        document.getElementById(field).src = "resources/flags/" + currValue +".png";
     }
 
     getFromFlagImageId(){

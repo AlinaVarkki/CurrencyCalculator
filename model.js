@@ -10,7 +10,6 @@ class Model{
 
     setRatesMap(currencyAndRateMap){
         this.currencyAndRateMap = currencyAndRateMap;
-        console.log(currencyAndRateMap);
     }
 
     setBankFee(bankFee){

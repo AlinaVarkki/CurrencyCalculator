@@ -9,6 +9,18 @@ currencyAndRateMap.set("EUR", 1.0);
 checkDateAndUpdateValues();
 addHandlers();
 
+//registering service worker
+if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => {
+                console.log('registered!!!', reg);
+            }) .catch(err => {
+            console.log("failed", err);
+        });
+    });
+}
+
 function checkDateAndUpdateValues(){
     //check when the rates were updated last, if it is run for the first time or rates were updated over 24 hours ago, refresh the rates
     let lastUpdateTimestamp = localStorage.getItem("lastUpdatedTime");
@@ -100,6 +112,7 @@ function updateCurrenciesAndRates() {
             setValuesFromLocalStorage();
             model.setRatesMap(currencyAndRateMap);
     });
+
     request.send(null);
 }
 
@@ -128,7 +141,7 @@ function setValuesFromLocalStorage(){
     model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
     model.setBankFee(view.getValueById(view.getBankFeeId()));
 
-    updateFlags()
+    updateFlags();
 }
 
 function updateFlags(){
