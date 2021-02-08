@@ -27,6 +27,10 @@ class View{
         document.getElementById(field).src = "resources/flags/" + currValue +".png";
     }
 
+    getIdOfCurrentlySelectedOption(field){
+        return document.getElementById(field).selectedIndex;
+    }
+
     getFromFlagImageId(){
         return "fromFlag";
     }
@@ -67,8 +71,13 @@ class View{
         return 'arrows';
     }
 
-    getIdOfCurrentlySelectedOption(field){
-        return document.getElementById(field).selectedIndex;
+    getPrevCurrencyField(){
+        return "currencyPrev";
     }
+
+    getCurrCurrencyField(){
+        return "currencyCurr";
+    }
+
 
 }

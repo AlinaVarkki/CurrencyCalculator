@@ -32,13 +32,12 @@ function checkDateAndUpdateValues(){
         //if the values are refreshed, change last visited to current
         localStorage.setItem("lastUpdatedTime", currTimestamp.toString());
 
-    }else{
+    }
        //get currencies/rates map from localStorage
         currencyAndRateMap =  new Map(JSON.parse(localStorage.currencyRateMap));
         addCurrencyOptions();
         setValuesFromLocalStorage();
         model.setRatesMap(currencyAndRateMap);
-    }
 }
 
 function addHandlers(){
@@ -57,11 +56,13 @@ function addHandlers(){
 //handler for starting currency selector
     view.setUpButtonHandler(view.getStartingCurrencyId(),() =>{
         startingCurrencyChange();
+        equalButtonPressed();
     });
 
 //handler for goal currency selector
     view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
         goalCurrencyChange();
+        equalButtonPressed();
     });
 
     //handler for equals button
@@ -91,14 +92,13 @@ function addHandlers(){
         equalButtonPressed();
     });
     
-    
 }
 
 function equalButtonPressed(){
     let answer = model.getAnswer();
     if(!isNaN(answer)){
-        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
-        view.displayValueToField(view.getResultFieldId(), model.getAnswer());
+        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount()  + " " + view.getValueById(view.getStartingCurrencyId()));
+        view.displayValueToField(view.getResultFieldId(), model.getAnswer() + " " + view.getValueById(view.getGoalCurrencyId()));
     }else{
         model.clearCurrAmount();
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
@@ -139,9 +139,6 @@ function updateCurrenciesAndRates() {
                 }
             }
             localStorage.currencyRateMap = JSON.stringify(Array.from(currencyAndRateMap.entries()));
-            addCurrencyOptions();
-            setValuesFromLocalStorage();
-            model.setRatesMap(currencyAndRateMap);
     });
 
     request.send(null);
