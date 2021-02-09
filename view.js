@@ -19,6 +19,10 @@ class View{
         document.getElementById(id).addEventListener("click", handler);
     }
 
+    setUpDropdownHandler(id, handler){
+        document.getElementById(id).addEventListener("change", handler);
+    }
+
     displayValueToField(field, value){
         document.getElementById(field).innerHTML = value;
     }

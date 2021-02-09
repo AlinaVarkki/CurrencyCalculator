@@ -7,8 +7,6 @@ const resourcesToCache = [
     'index.html',
     'light.css',
     'controller.js',
-    'indexOld.html',
-    'lightOld.css',
     'model.js',
     'normalize.css',
     'view.js',
@@ -45,7 +43,8 @@ const resourcesToCache = [
     'resources/flags/TRY.png',
     'resources/flags/USD.png',
     'resources/flags/ZAR.png',
-    'resources/reverse.png'
+    'resources/reverse.png',
+    'resources/menuIcon.JPG'
 ];
 
 self.addEventListener('install', event => {

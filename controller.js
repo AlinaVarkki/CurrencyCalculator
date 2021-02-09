@@ -25,7 +25,6 @@ function checkDateAndUpdateValues(){
     //check when the rates were updated last, if it is run for the first time or rates were updated over 24 hours ago, refresh the rates
     let lastUpdateTimestamp = localStorage.getItem("lastUpdatedTime");
     let currTimestamp = new Date().valueOf();
-
     let diffInHours = (currTimestamp - lastUpdateTimestamp)/1000/60/60;
     if(lastUpdateTimestamp === null || diffInHours >= 24){
         updateCurrenciesAndRates();
@@ -40,27 +39,27 @@ function checkDateAndUpdateValues(){
         model.setRatesMap(currencyAndRateMap);
 }
 
-function addHandlers(){
-//handlers for all digits
+    function addHandlers(){
+    //handlers for all digits
     let element = view.getAllNumericButtons();
     for(let i = 0; i < element.length; i++){
         addNumericButtonListener(element[i].id);
     }
-//handler for clear button
+    //handler for clear button
     view.setUpButtonHandler(view.getClearButtonId(),() =>{
         model.clearCurrAmount();
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
         view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
     });
 
-//handler for starting currency selector
-    view.setUpButtonHandler(view.getStartingCurrencyId(),() =>{
+    //handler for starting currency selector
+    view.setUpDropdownHandler(view.getStartingCurrencyId(),() =>{
         startingCurrencyChange();
         equalButtonPressed();
     });
 
-//handler for goal currency selector
-    view.setUpButtonHandler(view.getGoalCurrencyId(),() =>{
+    //handler for goal currency selector
+    view.setUpDropdownHandler(view.getGoalCurrencyId(),() =>{
         goalCurrencyChange();
         equalButtonPressed();
     });
@@ -72,9 +71,10 @@ function addHandlers(){
     });
 
     //handler for bank fee selector
-    view.setUpButtonHandler(view.getBankFeeId(), ()=>{
+    view.setUpDropdownHandler(view.getBankFeeId(), ()=>{
         model.setBankFee(view.getValueById(view.getBankFeeId()));
         localStorage.bankFee = view.getIdOfCurrentlySelectedOption(view.getBankFeeId());
+        equalButtonPressed();
     });
 
     //reverse currencies from/to

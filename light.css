@@ -157,7 +157,7 @@ button{
 }
 
 #arrows{
-    width: 30%;
+    width: 35%;
     align-self: center;
 }
 
@@ -219,4 +219,8 @@ button{
 
 #ClearButton{
     color: rgb(251, 175, 176);
+}
+
+#id{
+    height: 1vh;
 }
