@@ -45,6 +45,7 @@ const resourcesToCache = [
     'resources/flags/ZAR.png',
     'resources/reverse.png',
     'resources/menuIcon.JPG',
+    'resources/tapIcon.JPG',
     'resources/close.JPG'
 ];
 

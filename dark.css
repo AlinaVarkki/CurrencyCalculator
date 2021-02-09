@@ -1,0 +1,322 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background-color: rgb(57, 72, 101);
+    transition: 0.8s;
+    -webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -o-transition: 0.8s;
+    padding: 0;
+    margin: 0;
+}
+
+
+.top-rightPanel{
+    box-shadow: 0 6px 20px 5px rgb(229, 243, 254);
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.bottom-rightPanel{
+    box-shadow: 0 0 10px 1px rgb(229, 243, 254);
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.top-leftPanel{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bottom-leftPanel{
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.right-panel{
+    transition: margin-left 0.3s;
+    background: white;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.left-panel{
+    transition: 0.3s;
+    padding: 1vh;
+    background: white;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 0 50px rgb(82, 147, 205);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    height: 90%;
+    max-height: 750px;
+    width: 90%;
+    max-width: 400px;
+}
+
+input, select {
+    width: 100%;
+    padding: min(2vh, 20px);;
+    font-size: 1em;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+
+}
+
+.result{
+    width: 96.9%;
+}
+
+select{
+    color: #ffffff;
+    background-color: rgb(82, 147, 205);
+}
+
+.calculatorButtons input{
+    color: grey;
+    text-align: center;
+    line-height: 25px;
+    width: 31.3%;
+    font-size: min(2.5vh, 20px);
+}
+
+.calculatorButtons{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.calculatorButtons, button{
+    margin-top: 0.2vh;
+}
+
+input[type="text"] {
+    box-shadow: 0 6px 20px 5px rgb(229, 243, 254);
+    color: rgb(87, 179, 254);
+    background-color: rgb(255, 255, 255);
+}
+
+input[type="button"]:active {
+    background-color: rgb(58, 56, 90);
+    color: #fff;
+
+}
+
+button{
+    display: flex;
+    border: none;
+    background-color: rgb(41, 38, 38);
+    padding: 10px;
+    color: white;
+    border-radius: 4px;
+}
+
+#bankFeeSelector{
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    width: 90%;
+    height: 100%;
+}
+
+#bank{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: rgb(154, 208, 253);
+    padding: 10px;
+    color: white;
+    border-radius: 4px;
+}
+
+#arrows{
+    width: 35%;
+    align-self: center;
+}
+
+#fromFlag, #toFlag{
+    height: 45%;
+    opacity: 70%;
+    box-shadow: 0 0 2px 2px #9AD0FD;
+
+}
+
+#startingCurrency, #goalCurrency{
+    box-shadow: 0 0 2px 2px #9AD0FD;
+}
+
+.previous {
+    margin-right: 3vh;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30%;
+    font-size: min(2.5vh, 20px);
+    font-weight: 100;
+    color: grey;
+}
+.current {
+    margin-right: 3vh;;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 70%;
+    font-size: min(4vh, 35px);
+    font-weight: 200;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#Equals{
+    text-align: center;
+    background-color: rgb(87, 179, 254);
+    border: none;
+    color: white;
+    font-size: min(4vh, 35px);
+    width: 75%;
+    height: 70%;
+    padding-bottom: 2.2vh;
+    padding-top: 1px;
+    box-shadow: 0 3px 20px rgb(138, 199, 255);
+
+}
+
+.equalArea{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+}
+
+#ClearButton{
+    color: rgb(251, 175, 176);
+}
+
+#menu{
+    height: min(3.5vh, 25px);
+    width: min(3.5vh, 25px);
+    margin-top: 0.3vh;
+    margin-left: 0.5vh;
+}
+
+#menuMain{
+    height: min(3.5vh, 25px);
+    width: min(3.5vh, 25px);
+    margin-top: 1.8vh;
+    visibility: hidden;
+}
+::-webkit-scrollbar {
+    width: 1vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #13588f;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #13588f;
+}
+
+#firstSelection, #secondSelection{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#firstSelection{
+    flex-direction: column-reverse;
+}
+
+
+@media only screen and (orientation: landscape) {
+    .container {
+        height: 90%;
+        max-height: 750px;
+        width: 90%;
+        max-width: 800px;
+    }
+
+    .top-leftPanel{
+        height: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .bottom-leftPanel{
+        height: 50%;
+    }
+
+    #arrows{
+        width: 20%;
+        align-self: center;
+    }
+
+    #fromFlag, #toFlag{
+        height: min(12vh, 55px);
+        width: 100%;
+    }
+
+    #Equals{
+        text-align: center;
+        width: 50%;
+        height: 80%;
+    }
+
+    #firstSelection{
+        flex-direction: column;
+    }
+
+    .previous {
+        font-size: min(3.5vh, 30px);
+    }
+    .current {
+        font-size: min(6vh, 45px);
+    }
+
+    .calculatorButtons input{
+        font-size: min(4vh, 20px);
+    }
+
+}

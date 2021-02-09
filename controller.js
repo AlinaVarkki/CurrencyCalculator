@@ -25,14 +25,15 @@ function checkDateAndUpdateValues() {
     let lastUpdateTimestamp = localStorage.getItem("lastUpdatedTime");
     let currTimestamp = new Date().valueOf();
     let diffInHours = (currTimestamp - lastUpdateTimestamp) / 1000 / 60 / 60;
-    let firstTime = (lastUpdateTimestamp === null);
-    if (lastUpdateTimestamp === null || diffInHours >= 24) {
-        updateCurrenciesAndRates(firstTime);
+    let firstTime = lastUpdateTimestamp === null;
+    if (lastUpdateTimestamp === null || diffInHours <= 24) {
+        updateCurrenciesAndRates();
         //if the values are refreshed, change last visited to current
         localStorage.setItem("lastUpdatedTime", currTimestamp.toString());
     }
-    if(!firstTime) {
-        //get currencies/rates map from localStorage
+
+    if (!firstTime) {
+        //get currencies/rates map from localStorage, if method to get rates from API was called it will execute after this and override these values
         currencyAndRateMap = new Map(JSON.parse(localStorage.currencyRateMap));
         addCurrencyOptions();
         setValuesFromLocalStorage();
@@ -40,11 +41,13 @@ function checkDateAndUpdateValues() {
     }
 }
 
-function updateCurrenciesAndRates(firstTime) {
+function updateCurrenciesAndRates() {
     let request = new XMLHttpRequest();
     request.open("GET", "https://devweb2020.cis.strath.ac.uk/~aes02112/ecbxml.php", true);
 
+    //if there is no network and this method is called, it never gets inside and cached values are left inside the map
     request.addEventListener("load", function () {
+
         let exchangeRates = request.responseXML;
         let cubes = exchangeRates.getElementsByTagName("Cube");
         for (let i = 0; i < cubes.length; i++) {
@@ -56,20 +59,17 @@ function updateCurrenciesAndRates(firstTime) {
         }
         localStorage.currencyRateMap = JSON.stringify(Array.from(currencyAndRateMap.entries()));
 
-        if(firstTime){
-            currencyAndRateMap = new Map(JSON.parse(localStorage.currencyRateMap));
-            addCurrencyOptions();
-            setValuesFromLocalStorage();
-            model.setRatesMap(currencyAndRateMap);
-        }
+        currencyAndRateMap = new Map(JSON.parse(localStorage.currencyRateMap));
+        addCurrencyOptions();
+        setValuesFromLocalStorage();
+        model.setRatesMap(currencyAndRateMap);
+        
     });
-
     request.send(null);
 }
 
 //handlers for all digits
 function addHandlers() {
-
 
 
     let element = view.getAllNumericButtons();
