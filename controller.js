@@ -9,76 +9,117 @@ currencyAndRateMap.set("EUR", 1.0);
 checkDateAndUpdateValues();
 addHandlers();
 
-//registering service worker
-if('serviceWorker' in navigator){
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
             .then(reg => {
                 console.log('registered!!!', reg);
-            }) .catch(err => {
+            }).catch(err => {
             console.log("failed", err);
         });
     });
 }
 
-function checkDateAndUpdateValues(){
+function checkDateAndUpdateValues() {
     //check when the rates were updated last, if it is run for the first time or rates were updated over 24 hours ago, refresh the rates
     let lastUpdateTimestamp = localStorage.getItem("lastUpdatedTime");
     let currTimestamp = new Date().valueOf();
-    let diffInHours = (currTimestamp - lastUpdateTimestamp)/1000/60/60;
-    if(lastUpdateTimestamp === null || diffInHours >= 24){
-        updateCurrenciesAndRates();
+    let diffInHours = (currTimestamp - lastUpdateTimestamp) / 1000 / 60 / 60;
+    let firstTime = (lastUpdateTimestamp === null);
+    if (lastUpdateTimestamp === null || diffInHours <= 24) {
+        updateCurrenciesAndRates(firstTime);
         //if the values are refreshed, change last visited to current
         localStorage.setItem("lastUpdatedTime", currTimestamp.toString());
-
     }
-       //get currencies/rates map from localStorage
-        currencyAndRateMap =  new Map(JSON.parse(localStorage.currencyRateMap));
+    if(!firstTime) {
+        //get currencies/rates map from localStorage
+        currencyAndRateMap = new Map(JSON.parse(localStorage.currencyRateMap));
         addCurrencyOptions();
         setValuesFromLocalStorage();
         model.setRatesMap(currencyAndRateMap);
+    }
 }
 
-    function addHandlers(){
-    //handlers for all digits
+function updateCurrenciesAndRates(firstTime) {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://devweb2020.cis.strath.ac.uk/~aes02112/ecbxml.php", true);
+
+    request.addEventListener("load", function () {
+        let exchangeRates = request.responseXML;
+        let cubes = exchangeRates.getElementsByTagName("Cube");
+        for (let i = 0; i < cubes.length; i++) {
+            let currency = cubes[i].getAttribute("currency");
+            let rate = cubes[i].getAttribute("rate");
+            if (currency !== null) {
+                currencyAndRateMap.set(currency, rate);
+            }
+        }
+        localStorage.currencyRateMap = JSON.stringify(Array.from(currencyAndRateMap.entries()));
+
+        if(firstTime){
+            currencyAndRateMap = new Map(JSON.parse(localStorage.currencyRateMap));
+            addCurrencyOptions();
+            setValuesFromLocalStorage();
+            model.setRatesMap(currencyAndRateMap);
+        }
+    });
+
+    request.send(null);
+}
+
+//handlers for all digits
+function addHandlers() {
+
+
+
     let element = view.getAllNumericButtons();
-    for(let i = 0; i < element.length; i++){
+    for (let i = 0; i < element.length; i++) {
         addNumericButtonListener(element[i].id);
     }
     //handler for clear button
-    view.setUpButtonHandler(view.getClearButtonId(),() =>{
+    view.setUpButtonHandler(view.getClearButtonId(), () => {
         model.clearCurrAmount();
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
         view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
     });
 
     //handler for starting currency selector
-    view.setUpDropdownHandler(view.getStartingCurrencyId(),() =>{
+    view.setUpDropdownHandler(view.getStartingCurrencyId(), () => {
         startingCurrencyChange();
         equalButtonPressed();
     });
 
     //handler for goal currency selector
-    view.setUpDropdownHandler(view.getGoalCurrencyId(),() =>{
+    view.setUpDropdownHandler(view.getGoalCurrencyId(), () => {
         goalCurrencyChange();
         equalButtonPressed();
     });
 
     //handler for equals button
-    view.setUpButtonHandler(view.getEqualsButtonId(),() =>{
+    view.setUpButtonHandler(view.getEqualsButtonId(), () => {
         equalButtonPressed();
         // model.clearCurrAmount();
     });
 
+    //menu close handler
+    view.setUpButtonHandler(view.getMenuTogglerId(), () => {
+        view.closeSideMenu();
+    });
+
+    //menu open handler
+    view.setUpButtonHandler(view.getOpenMenuTogglerId(), () => {
+        view.openSideMenu();
+    });
+
     //handler for bank fee selector
-    view.setUpDropdownHandler(view.getBankFeeId(), ()=>{
+    view.setUpDropdownHandler(view.getBankFeeId(), () => {
         model.setBankFee(view.getValueById(view.getBankFeeId()));
         localStorage.bankFee = view.getIdOfCurrentlySelectedOption(view.getBankFeeId());
         equalButtonPressed();
     });
 
     //reverse currencies from/to
-    view.setUpButtonHandler(view.getArrowsId(), ()=>{
+    view.setUpButtonHandler(view.getArrowsId(), () => {
 
         let startingCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
         let goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
@@ -91,71 +132,51 @@ function checkDateAndUpdateValues(){
 
         equalButtonPressed();
     });
-    
+
 }
 
-function equalButtonPressed(){
+function equalButtonPressed() {
     let answer = model.getAnswer();
-    if(!isNaN(answer)){
-        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount()  + " " + view.getValueById(view.getStartingCurrencyId()));
+    if (!isNaN(answer)) {
+        view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount() + " " + view.getValueById(view.getStartingCurrencyId()));
         view.displayValueToField(view.getResultFieldId(), model.getAnswer() + " " + view.getValueById(view.getGoalCurrencyId()));
-    }else{
+    } else {
         model.clearCurrAmount();
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
     }
 }
 
-function startingCurrencyChange(){
+function startingCurrencyChange() {
     model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
     localStorage.selectedCurrencyId = view.getIdOfCurrentlySelectedOption(view.getStartingCurrencyId());
     view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
 }
 
-function goalCurrencyChange(){
+function goalCurrencyChange() {
     model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
     localStorage.goalCurrencyId = view.getIdOfCurrentlySelectedOption(view.getGoalCurrencyId());
     view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
 }
 
-function addNumericButtonListener(id){
-    view.setUpButtonHandler(id,()=>{
+function addNumericButtonListener(id) {
+    view.setUpButtonHandler(id, () => {
         model.updateCurrentAmount(id);
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
     });
 }
 
-function updateCurrenciesAndRates() {
-    let request = new XMLHttpRequest();
-    request.open("GET", "https://devweb2020.cis.strath.ac.uk/~aes02112/ecbxml.php", true);
-
-    request.addEventListener("load", function () {
-            let exchangeRates = request.responseXML;
-            let cubes = exchangeRates.getElementsByTagName("Cube");
-            for (let i = 0; i < cubes.length; i++) {
-                let currency = cubes[i].getAttribute("currency");
-                let rate = cubes[i].getAttribute("rate");
-                if (currency !== null) {
-                    currencyAndRateMap.set(currency, rate);
-                }
-            }
-            localStorage.currencyRateMap = JSON.stringify(Array.from(currencyAndRateMap.entries()));
-    });
-
-    request.send(null);
-}
-
-function addCurrencyOptions(){
+function addCurrencyOptions() {
 
     let startingCurrField = document.getElementById(view.getStartingCurrencyId());
     let goalCurrField = document.getElementById(view.getGoalCurrencyId());
-    for(const [currency, rate] of currencyAndRateMap.entries()){
+    for (const [currency, rate] of currencyAndRateMap.entries()) {
         startingCurrField.options[startingCurrField.options.length] = new Option(currency, currency);
         goalCurrField.options[goalCurrField.options.length] = new Option(currency, currency);
     }
 
 }
 
-function setValuesFromLocalStorage(){
+function setValuesFromLocalStorage() {
 
     let selectedHomeCurrency = localStorage.selectedCurrencyId || 6;
     let selectedGoalCurrency = localStorage.goalCurrencyId || 0;
@@ -172,7 +193,7 @@ function setValuesFromLocalStorage(){
     updateFlags();
 }
 
-function updateFlags(){
+function updateFlags() {
     view.changeFlag(view.getFromFlagImageId(), view.getValueById(view.getStartingCurrencyId()));
     view.changeFlag(view.getToFlagImageId(), view.getValueById(view.getGoalCurrencyId()));
 }

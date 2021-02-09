@@ -47,6 +47,7 @@ body {
 }
 
 .right-panel{
+    transition: margin-left 0.3s;
     background: white;
     width: 60%;
     display: flex;
@@ -54,6 +55,7 @@ body {
     justify-content: space-around;
 }
 .left-panel{
+    transition: 0.3s;
     padding: 1vh;
     background: white;
     width: 35%;
@@ -221,6 +223,16 @@ button{
     color: rgb(251, 175, 176);
 }
 
-#id{
-    height: 1vh;
+#menu{
+    height: min(3.5vh, 25px);
+    width: min(3.5vh, 25px);
+    margin-top: 0.3vh;
+    margin-left: 0.5vh;
+}
+
+#menuMain{
+    height: min(3.5vh, 25px);
+    width: min(3.5vh, 25px);
+    margin-top: 1.8vh;
+    visibility: hidden;
 }

@@ -1,87 +1,106 @@
 'use strict';
 
-class View{
+class View {
 
-    getAllNumericButtons(){
-        let elements = document.getElementsByName( 'numberButton');
-        return elements;
+    constructor() {
     }
 
-    setSelectionToSpecificIndex(field, value){
+    getAllNumericButtons() {
+        return document.getElementsByName('numberButton');
+    }
+
+    setSelectionToSpecificIndex(field, value) {
         document.getElementById(field).selectedIndex = value;
     }
 
-    getValueById(id){
+    getValueById(id) {
         return document.getElementById(id).value;
     }
 
-    setUpButtonHandler(id, handler){
+    setUpButtonHandler(id, handler) {
         document.getElementById(id).addEventListener("click", handler);
     }
 
-    setUpDropdownHandler(id, handler){
+    setUpDropdownHandler(id, handler) {
         document.getElementById(id).addEventListener("change", handler);
     }
 
-    displayValueToField(field, value){
+    displayValueToField(field, value) {
         document.getElementById(field).innerHTML = value;
     }
 
     changeFlag(field, currValue) {
-        document.getElementById(field).src = "resources/flags/" + currValue +".png";
+        document.getElementById(field).src = "resources/flags/" + currValue + ".png";
     }
 
-    getIdOfCurrentlySelectedOption(field){
+    getIdOfCurrentlySelectedOption(field) {
         return document.getElementById(field).selectedIndex;
     }
 
-    getFromFlagImageId(){
+    closeSideMenu() {
+        document.getElementById('left-panel').style.width = '0%';
+        document.getElementById("left-panel").style.opacity = "0";
+        document.getElementById('left-panel').style.overflow = 'hidden';
+        document.getElementById('right-panel').style.width = '100%';
+        document.getElementById('right-panel').style.overflow = 'hidden';
+        document.getElementById('menuMain').style.visibility = 'visible';
+    }
+
+    openSideMenu(){
+        document.getElementById('left-panel').style.width = '35%';
+        document.getElementById("left-panel").style.opacity = "100";
+        document.getElementById('left-panel').style.overflow = 'visible';
+        document.getElementById('right-panel').style.width = '60%';
+        document.getElementById('right-panel').style.overflow = 'visible';
+        document.getElementById('menuMain').style.visibility = 'hidden';
+    }
+
+    getMenuTogglerId() {
+        return'menu';
+    }
+
+    getOpenMenuTogglerId() {
+        return'menuMain';
+    }
+
+    getFromFlagImageId() {
         return "fromFlag";
     }
 
-    getToFlagImageId(){
+    getToFlagImageId() {
         return "toFlag";
     }
 
-    getWantedAmountFieldId(){
+    getWantedAmountFieldId() {
         return 'wantedAmount';
     }
 
-    getResultFieldId(){
+    getResultFieldId() {
         return 'result';
     }
 
-    getEqualsButtonId(){
+    getEqualsButtonId() {
         return 'Equals';
     }
 
-    getClearButtonId(){
+    getClearButtonId() {
         return 'ClearButton';
     }
 
-    getStartingCurrencyId(){
+    getStartingCurrencyId() {
         return 'startingCurrency';
     }
 
-    getGoalCurrencyId(){
+    getGoalCurrencyId() {
         return 'goalCurrency';
     }
 
-    getBankFeeId(){
+    getBankFeeId() {
         return 'bankFeeSelector';
     }
 
-    getArrowsId(){
+    getArrowsId() {
         return 'arrows';
     }
-
-    getPrevCurrencyField(){
-        return "currencyPrev";
-    }
-
-    getCurrCurrencyField(){
-        return "currencyCurr";
-    }
-
 
 }

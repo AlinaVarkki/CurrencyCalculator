@@ -44,7 +44,8 @@ const resourcesToCache = [
     'resources/flags/USD.png',
     'resources/flags/ZAR.png',
     'resources/reverse.png',
-    'resources/menuIcon.JPG'
+    'resources/menuIcon.JPG',
+    'resources/close.JPG'
 ];
 
 self.addEventListener('install', event => {
