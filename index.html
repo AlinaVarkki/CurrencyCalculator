@@ -3,27 +3,32 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <title>Currency Converter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="apple-touch-icon" sizes="128x128" href="resources/tapIcon.JPG">
+    <link rel="icon" sizes="192x192" href="resources/tapIcon.JPG">
     <link rel="stylesheet" href="normalize.css"/>
     <link rel="stylesheet" href="light.css" id="theme"/>
-    <link rel="icon" type="image/png" href="resources/tapIcon.JPG">
 </head>
 <body>
 <div class="container">
 
 
-    <div class = "left-panel" id = "left-panel">
-        <img id="menu" src="resources/close.JPG" />
+    <div class="left-panel" id="left-panel">
+        <img id="menu" src="resources/close.JPG"/>
         <div class="top-leftPanel">
-
+            <div id="firstSelection">
+                <img id="fromFlag" src=""/>
                 <select id="startingCurrency" name="currency"></select>
-            <img id="fromFlag" src="" />
-            <img id = "arrows" src="resources/reverse.png"/>
-            <img id="toFlag" src="" />
+            </div>
+            <img id="arrows" src="resources/reverse.png"/>
+            <div id="secondSelection">
+                <img id="toFlag" src=""/>
                 <select id="goalCurrency" name="currency"></select>
-
+            </div>
         </div>
         <div class="bottom-leftPanel">
             <div id="bank">
@@ -35,43 +40,43 @@
                     <option value="6">6%</option>
                 </select>
             </div>
-        <button id="dark-mode"> Dark Mode 🌙</button>
+            <button id="dark-mode"> Dark Mode 🌙</button>
         </div>
     </div>
 
-    <div class="right-panel" id = "right-panel">
-        <div class = "top-rightPanel">
-            <img id="menuMain" src="resources/menuIcon.JPG" />
+    <div class="right-panel" id="right-panel">
+        <div class="top-rightPanel">
+            <img id="menuMain" src="resources/menuIcon.JPG"/>
 
             <span id="wantedAmount" class="previous" class="result"></span>
-            <span  id="result" class="current"  class="result">
+            <span id="result" class="current" class="result">
             </span>
 
         </div>
 
         <div class="bottom-rightPanel">
 
-        <div class="calculatorButtons">
-            <input type="button" name="numberButton" value="1" id="1"/>
-            <input type="button" name="numberButton" value="2" id="2"/>
-            <input type="button" name="numberButton" value="3" id="3"/>
-        </div>
-        <div class="calculatorButtons">
-            <input type="button" name="numberButton" value="4" id="4"/>
-            <input type="button" name="numberButton" value="5" id="5"/>
-            <input type="button" name="numberButton" value="6" id="6"/>
-        </div>
-        <div class="calculatorButtons">
-            <input type="button" name="numberButton" value="7" id="7"/>
-            <input type="button" name="numberButton" value="8" id="8"/>
-            <input type="button" name="numberButton" value="9" id="9"/>
-        </div>
-        <div class="calculatorButtons">
-            <input type="button" value="C" id="ClearButton"/>
-            <input type="button" name="numberButton" value="0" id="0"/>
-        </div>
+            <div class="calculatorButtons">
+                <input type="button" name="numberButton" value="1" id="1"/>
+                <input type="button" name="numberButton" value="2" id="2"/>
+                <input type="button" name="numberButton" value="3" id="3"/>
+            </div>
+            <div class="calculatorButtons">
+                <input type="button" name="numberButton" value="4" id="4"/>
+                <input type="button" name="numberButton" value="5" id="5"/>
+                <input type="button" name="numberButton" value="6" id="6"/>
+            </div>
+            <div class="calculatorButtons">
+                <input type="button" name="numberButton" value="7" id="7"/>
+                <input type="button" name="numberButton" value="8" id="8"/>
+                <input type="button" name="numberButton" value="9" id="9"/>
+            </div>
+            <div class="calculatorButtons">
+                <input type="button" value="C" id="ClearButton"/>
+                <input type="button" name="numberButton" value="0" id="0"/>
+            </div>
             <div class="equalArea">
-            <input type="button" value="=" id="Equals"/>
+                <input type="button" value="=" id="Equals"/>
             </div>
         </div>
     </div>

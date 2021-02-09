@@ -164,7 +164,7 @@ button{
 }
 
 #fromFlag, #toFlag{
-    height: 13%;
+    height: 45%;
     opacity: 70%;
     box-shadow: 0 0 2px 2px #9AD0FD;
 
@@ -235,4 +235,88 @@ button{
     width: min(3.5vh, 25px);
     margin-top: 1.8vh;
     visibility: hidden;
+}
+::-webkit-scrollbar {
+    width: 1vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #13588f;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #13588f;
+}
+
+#firstSelection, #secondSelection{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#firstSelection{
+    flex-direction: column-reverse;
+}
+
+
+@media only screen and (orientation: landscape) {
+    .container {
+        height: 90%;
+        max-height: 750px;
+        width: 90%;
+        max-width: 800px;
+    }
+
+    .top-leftPanel{
+        height: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .bottom-leftPanel{
+        height: 50%;
+    }
+
+    #arrows{
+        width: 20%;
+        align-self: center;
+    }
+
+    #fromFlag, #toFlag{
+        height: min(12vh, 55px);
+        width: 100%;
+    }
+
+    #Equals{
+        text-align: center;
+        width: 50%;
+        height: 80%;
+     }
+
+    #firstSelection{
+        flex-direction: column;
+    }
+
+    .previous {
+        font-size: min(3.5vh, 30px);
+    }
+    .current {
+        font-size: min(6vh, 45px);
+    }
+
+    .calculatorButtons input{
+        font-size: min(4vh, 20px);
+    }
+
 }
