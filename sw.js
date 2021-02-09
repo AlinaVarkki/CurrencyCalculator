@@ -6,6 +6,7 @@ const resourcesToCache = [
     '',
     'index.html',
     'light.css',
+    'dark.css',
     'controller.js',
     'model.js',
     'normalize.css',

@@ -17,7 +17,7 @@ body {
 
 
 .top-rightPanel{
-    box-shadow: 0 6px 20px 5px rgb(229, 243, 254);
+    box-shadow: 0 6px 20px 5px rgb(109, 146, 200);
     height: 30%;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ body {
 }
 
 .bottom-rightPanel{
-    box-shadow: 0 0 10px 1px rgb(229, 243, 254);
+    box-shadow: 0 0 10px 1px rgb(109, 146, 200);
     height: 70%;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,6 @@ body {
 
 .right-panel{
     transition: margin-left 0.3s;
-    background: white;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -57,7 +56,6 @@ body {
 .left-panel{
     transition: 0.3s;
     padding: 1vh;
-    background: white;
     width: 35%;
     display: flex;
     flex-direction: column;
@@ -65,10 +63,10 @@ body {
 }
 
 .container {
-    background: white;
+    background: #3d5a80;
     display: flex;
     justify-content: space-around;
-    box-shadow: 0 0 50px rgb(82, 147, 205);
+    box-shadow: 0 0 50px #152f47;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -102,7 +100,8 @@ select{
 }
 
 .calculatorButtons input{
-    color: grey;
+    background-color: #3D5A80;
+    color: white;
     text-align: center;
     line-height: 25px;
     width: 31.3%;
@@ -165,13 +164,13 @@ button{
 
 #fromFlag, #toFlag{
     height: 45%;
-    opacity: 70%;
+    opacity: 95%;
     box-shadow: 0 0 2px 2px #9AD0FD;
 
 }
 
 #startingCurrency, #goalCurrency{
-    box-shadow: 0 0 2px 2px #9AD0FD;
+    box-shadow: 0 0 2px 2px #9ad0fd;
 }
 
 .previous {
@@ -183,9 +182,10 @@ button{
     height: 30%;
     font-size: min(2.5vh, 20px);
     font-weight: 100;
-    color: grey;
+    color: #bebdbd;
 }
 .current {
+    color: white;
     margin-right: 3vh;;
     display: flex;
     justify-content: flex-end;
@@ -208,7 +208,7 @@ button{
     height: 70%;
     padding-bottom: 2.2vh;
     padding-top: 1px;
-    box-shadow: 0 3px 20px rgb(138, 199, 255);
+    box-shadow: 0 3px 20px rgb(112, 152, 184);
 
 }
 
@@ -220,7 +220,7 @@ button{
 }
 
 #ClearButton{
-    color: rgb(251, 175, 176);
+    color: rgb(238, 108, 77);
 }
 
 #menu{

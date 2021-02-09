@@ -63,7 +63,7 @@ function updateCurrenciesAndRates() {
         addCurrencyOptions();
         setValuesFromLocalStorage();
         model.setRatesMap(currencyAndRateMap);
-        
+
     });
     request.send(null);
 }
@@ -81,6 +81,11 @@ function addHandlers() {
         model.clearCurrAmount();
         view.displayValueToField(view.getResultFieldId(), model.getCurrentAmount());
         view.displayValueToField(view.getWantedAmountFieldId(), model.getCurrentAmount());
+    });
+
+    //handler for light/dark mode button
+    view.setUpButtonHandler(view.getSwitchModeButtonId(), () => {
+       view.switchMode();
     });
 
     //handler for starting currency selector

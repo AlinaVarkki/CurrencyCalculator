@@ -55,6 +55,10 @@ class View {
         document.getElementById('menuMain').style.visibility = 'hidden';
     }
 
+    switchMode(){
+        // if(theme.)
+    }
+
     getMenuTogglerId() {
         return'menu';
     }
@@ -103,4 +107,7 @@ class View {
         return 'arrows';
     }
 
+    getSwitchModeButtonId(){
+        return 'switchMode';
+    }
 }
