@@ -46,7 +46,7 @@ class View {
         document.getElementById('menuMain').style.visibility = 'visible';
     }
 
-    openSideMenu(){
+    openSideMenu() {
         document.getElementById('left-panel').style.width = '35%';
         document.getElementById("left-panel").style.opacity = "100";
         document.getElementById('left-panel').style.overflow = 'visible';
@@ -55,16 +55,45 @@ class View {
         document.getElementById('menuMain').style.visibility = 'hidden';
     }
 
-    switchMode(){
-        // if(theme.)
+    switchMode() {
+        let theme = document.getElementById("theme");
+        if (theme.getAttribute("href") === "light.css") {
+            this.setDarkTheme();
+        } else {
+            this.setLightTheme();
+        }
+    }
+
+    setTheme(theme){
+        if(theme === 'dark.css'){
+            this.setDarkTheme();
+        }else{
+            this.setLightTheme();
+        }
+    }
+
+    setDarkTheme(){
+        document.getElementById("theme").href = "dark.css";
+        localStorage.theme ="dark.css";
+        document.getElementById("menu").src = "resources/closeDark.JPG";
+        document.getElementById("menuMain").src = "resources/menuIconDark.JPG";
+        document.getElementById("switchMode").innerHTML = "Light Mode ☀";
+    }
+
+    setLightTheme(){
+        document.getElementById("theme").href = "light.css";
+        localStorage.theme ="light.css";
+        document.getElementById("menu").src = "resources/close.JPG";
+        document.getElementById("menuMain").src = "resources/menuIcon.JPG";
+        document.getElementById("switchMode").innerHTML  = "Dark Mode 🌙";
     }
 
     getMenuTogglerId() {
-        return'menu';
+        return 'menu';
     }
 
     getOpenMenuTogglerId() {
-        return'menuMain';
+        return 'menuMain';
     }
 
     getFromFlagImageId() {
@@ -107,7 +136,7 @@ class View {
         return 'arrows';
     }
 
-    getSwitchModeButtonId(){
+    getSwitchModeButtonId() {
         return 'switchMode';
     }
 }

@@ -75,10 +75,10 @@ body {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    height: 90%;
-    max-height: 750px;
-    width: 90%;
-    max-width: 400px;
+    height: 100%;
+    max-height: 850px;
+    width: 100%;
+    max-width: 640px;
 }
 
 input, select {
@@ -164,7 +164,8 @@ button{
 }
 
 #fromFlag, #toFlag{
-    height: 45%;
+    height: min(18vw, 100px);
+    width: 100%;
     opacity: 70%;
     box-shadow: 0 0 2px 2px #9AD0FD;
 
@@ -270,10 +271,10 @@ button{
 
 @media only screen and (orientation: landscape) {
     .container {
-        height: 90%;
+        height: 100%;
         max-height: 750px;
-        width: 90%;
-        max-width: 800px;
+        width: 100%;
+        max-width: 850px;
     }
 
     .top-leftPanel{
@@ -294,7 +295,7 @@ button{
     }
 
     #fromFlag, #toFlag{
-        height: min(12vh, 55px);
+        height: min(15vh, 70px);
         width: 100%;
     }
 
@@ -319,4 +320,7 @@ button{
         font-size: min(4vh, 20px);
     }
 
+    #menu, #menuMain{
+        margin-top: 2vh;
+    }
 }

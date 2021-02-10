@@ -41,6 +41,6 @@ class Model{
         this.fee = parseFloat(this.ans) * parseFloat(this.bankFee) / 100;
         this.ans = parseFloat(this.ans) + parseFloat(this.fee);
 
-        return this.ans.toFixed(2);
+        return this.ans.toFixed(0);
     }
 }

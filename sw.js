@@ -46,8 +46,10 @@ const resourcesToCache = [
     'resources/flags/ZAR.png',
     'resources/reverse.png',
     'resources/menuIcon.JPG',
+    'resources/menuIconDark.JPG',
     'resources/tapIcon.JPG',
-    'resources/close.JPG'
+    'resources/close.JPG',
+    'resources/closeDark.JPG'
 ];
 
 self.addEventListener('install', event => {

@@ -26,7 +26,8 @@ function checkDateAndUpdateValues() {
     let currTimestamp = new Date().valueOf();
     let diffInHours = (currTimestamp - lastUpdateTimestamp) / 1000 / 60 / 60;
     let firstTime = lastUpdateTimestamp === null;
-    if (lastUpdateTimestamp === null || diffInHours <= 24) {
+    console.log(diffInHours);
+    if (lastUpdateTimestamp === null || diffInHours >= 24) {
         updateCurrenciesAndRates();
         //if the values are refreshed, change last visited to current
         localStorage.setItem("lastUpdatedTime", currTimestamp.toString());
@@ -186,10 +187,14 @@ function setValuesFromLocalStorage() {
     let selectedHomeCurrency = localStorage.selectedCurrencyId || 6;
     let selectedGoalCurrency = localStorage.goalCurrencyId || 0;
     let selectedBankFee = localStorage.bankFee || 0;
+    let theme = localStorage.theme;
 
     view.setSelectionToSpecificIndex(view.getStartingCurrencyId(), selectedHomeCurrency);
     view.setSelectionToSpecificIndex(view.getGoalCurrencyId(), selectedGoalCurrency);
     view.setSelectionToSpecificIndex(view.getBankFeeId(), selectedBankFee);
+    if(theme !== null){
+         view.setTheme(theme);
+    }
 
     model.setStartingCurrency(view.getValueById(view.getStartingCurrencyId()));
     model.setGoalCurrency(view.getValueById(view.getGoalCurrencyId()));
