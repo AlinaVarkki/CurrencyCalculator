@@ -26,7 +26,6 @@ function checkDateAndUpdateValues() {
     let currTimestamp = new Date().valueOf();
     let diffInHours = (currTimestamp - lastUpdateTimestamp) / 1000 / 60 / 60;
     let firstTime = lastUpdateTimestamp === null;
-    console.log(diffInHours);
     if (lastUpdateTimestamp === null || diffInHours >= 24) {
         updateCurrenciesAndRates();
         //if the values are refreshed, change last visited to current

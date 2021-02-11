@@ -323,4 +323,20 @@ button{
     #menu, #menuMain{
         margin-top: 2vh;
     }
+
+    #menu{
+        height: min(6vh, 25px);
+        width: min(6vh, 25px);
+        margin-top: 1vh;
+
+    }
+
+    #menuMain{
+        height: min(6vh, 25px);
+        width: min(6vh, 25px);
+        margin-top: 2.2vh;
+        visibility: hidden;
+        margin-left: 1.5vh;
+    }
+
 }
